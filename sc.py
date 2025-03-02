@@ -3,6 +3,7 @@ from functools import reduce
 class HashSet:
     DEFAULT_CAPACITY = 16
 
+
     def __init__(self, capacity=DEFAULT_CAPACITY):
         self.capacity = max(1, capacity)
         self.buckets = [[] for _ in range(self.capacity)]
@@ -45,7 +46,7 @@ class HashSet:
     # 6. Reverse
     def reverse(self):
         for bucket in self.buckets:
-            bucket.reverse()   
+            bucket.reverse()
         self.buckets.reverse()
 
     # 7. From built-in list
@@ -53,7 +54,6 @@ class HashSet:
         for item in lst:
             self.add(item)
         return self
-
 
     # 8. To built-in list
     def to_list(self):
