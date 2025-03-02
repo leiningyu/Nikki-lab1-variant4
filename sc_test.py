@@ -11,6 +11,7 @@ def test_add():
     s.add(None)
     assert s.size() == 2
 
+
 def test_set():
     s = HashSet()
     s.add(1)
@@ -18,6 +19,7 @@ def test_set():
     assert s.member(2)
     assert not s.member(1)
     assert s.size() == 1
+
 
 def test_remove():
     s = HashSet()
@@ -28,6 +30,7 @@ def test_remove():
     s.add(None)
     assert s.remove(None) is True
 
+
 def test_size():
     s = HashSet()
     assert s.size() == 0
@@ -35,6 +38,7 @@ def test_size():
     assert s.size() == 1
     s.add(2)
     assert s.size() == 2
+
 
 def test_member():
     s = HashSet()
@@ -44,18 +48,20 @@ def test_member():
     s.add(None)
     assert s.member(None) is True
 
+
 def test_reverse():
     # Test a single bucket inversion
     s = HashSet(capacity=1)  # Force all elements into the same bucket
     s.from_list([1, 2, 3])
     s.reverse()
     assert s.to_list() == [3, 2, 1]
-    
+
     # Test multiple bucket conditions
     s = HashSet(capacity=3)
     s.from_list([0, 1, 2, 3])
     s.reverse()
     assert s.to_list() == [2, 1, 3, 0]
+
 
 def test_from_list_to_list():
     test_data = [
@@ -70,6 +76,7 @@ def test_from_list_to_list():
         # Notice the disorder of the set
         assert sorted(s.to_list(), key=hash) == sorted(list(set(data)), key=hash)
 
+
 def test_filter():
     s = HashSet()
     s.from_list([1, 2, 3, 4])
@@ -80,6 +87,7 @@ def test_filter():
     s.from_list([1, None, 3, 4])
     filtered = s.filter(lambda x: x is not None)
     assert sorted(filtered.to_list()) == [1, 3, 4]
+
 
 def test_map():
     s = HashSet()
@@ -95,17 +103,18 @@ def test_map():
 
 def test_reduce():
     s = HashSet()
-    assert s.reduce(lambda a,b: a+b, 0) == 0  # Empty set
+    assert s.reduce(lambda a, b: a+b, 0) == 0  # Empty set
     
     s.from_list([1,2,3])
-    assert s.reduce(lambda a,b: a+b) == 6  # No initial value
-    assert s.reduce(lambda a,b: a+b, 10) == 16
+    assert s.reduce(lambda a, b: a+b) == 6  # No initial value
+    assert s.reduce(lambda a, b: a+b, 10) == 16
 
     s = HashSet()
     s.from_list([1, None, 3])
     # view None as 0
     result = s.reduce(lambda a, b: a + (b if b is not None else 0), 0)
     assert result == 4
+
 
 def test_iterator():
     data = [1, 2, 3]
@@ -120,11 +129,13 @@ def test_iterator():
     with pytest.raises(StopIteration):
         next(empty_iter)
 
+
 # Monoid test
 def test_empty():
     empty = HashSet.empty()
     assert empty.size() == 0
     assert empty.to_list() == []
+
 
 def test_concat():
     s1 = HashSet().from_list([1, 2])
@@ -141,6 +152,7 @@ def test_concat():
     empty = HashSet.empty()
     combined = empty.concat(s1)
     assert combined.to_list() == s1.to_list()
+
 
 @given(st.lists(st.one_of(st.integers(), st.text(), st.none())))
 def test_from_to_list_equivalence(data):
@@ -168,3 +180,4 @@ def test_monoid_laws(a, b):
     s = HashSet().from_list([a])
     assert s.concat(empty).to_list() == s.to_list()
     assert empty.concat(s).to_list() == s.to_list()
+    
