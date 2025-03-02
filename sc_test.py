@@ -141,3 +141,30 @@ def test_concat():
     empty = HashSet.empty()
     combined = empty.concat(s1)
     assert combined.to_list() == s1.to_list()
+
+@given(st.lists(st.one_of(st.integers(), st.text(), st.none())))
+def test_from_to_list_equivalence(data):
+    s = HashSet()
+    s.from_list(data)
+    assert set(s.to_list()) == set(data)
+    assert len(s.to_list()) == len(set(data))
+
+@given(st.lists(st.integers()))
+def test_size_equivalence(data):
+    s = HashSet()
+    s.from_list(data)
+    assert s.size() == len(set(data))
+
+@given(st.integers(), st.integers())
+def test_monoid_laws(a, b):
+    # Associativity
+    s1 = HashSet().from_list([a])
+    s2 = HashSet().from_list([b])
+    s3 = HashSet().from_list([a, b])
+    assert s1.concat(s2).concat(s3).to_list() == s1.concat(s2.concat(s3)).to_list()
+
+    # Identity element
+    empty = HashSet.empty()
+    s = HashSet().from_list([a])
+    assert s.concat(empty).to_list() == s.to_list()
+    assert empty.concat(s).to_list() == s.to_list()
