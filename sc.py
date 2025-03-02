@@ -1,8 +1,8 @@
 from functools import reduce
 
+
 class HashSet:
     DEFAULT_CAPACITY = 16
-
 
     def __init__(self, capacity=DEFAULT_CAPACITY):
         self.capacity = max(1, capacity)
