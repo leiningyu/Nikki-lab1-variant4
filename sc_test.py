@@ -185,4 +185,3 @@ def test_monoid_laws(a, b):
     s = HashSet().from_list([a])
     assert s.concat(empty).to_list() == s.to_list()
     assert empty.concat(s).to_list() == s.to_list()
-
