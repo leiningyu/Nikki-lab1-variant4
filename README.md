@@ -1,13 +1,13 @@
 # Nikki - lab 1 - variant 4
 
-A series of functional requirements are realized and tested based on 
+A series of functional requirements are realized and tested based on
 `hash map, separate chaining` method.
 
 ## Project structure
 
 - `sc.py` -- Implementation of `Set` class based on hash map with separate chaining.
-  Supports methods: `add`, `set`, `remove`, `size`, `member`, `reverse`, 
-  `from_list`, `to_list`, `filter`, `map`, `reduce`, `__iter__`, `__next__`, 
+  Supports methods: `add`, `set`, `remove`, `size`, `member`, `reverse`,
+  `from_list`, `to_list`, `filter`, `map`, `reduce`, `__iter__`, `__next__`,
   `empty`, `concat`.
 
 - `sc_test.py` -- Unit and property-based tests for `sc`.
@@ -39,7 +39,7 @@ A series of functional requirements are realized and tested based on
 
 ## Design Notes
 
-- **Separate Chaining Hash Map**: 
+- **Separate Chaining Hash Map**:
   - Each bucket (array index) stores a linked list of key-value pairs.
   - Hash value modulo capacity determines the bucket index.
   - Duplicate values are rejected within the same bucket.
