@@ -15,9 +15,9 @@ A series of functional requirements are realized and tested based on
 ## Features
 
 - **PBT Tests**:
-  - `test_from_to_list_equivalence`
-  - `test_size_equivalence`
-  - `test_monoid_laws`
+   - `test_from_to_list_equivalence`
+   - `test_size_equivalence`
+   - `test_monoid_laws`
 
 ## Contribution
 
@@ -27,30 +27,30 @@ A series of functional requirements are realized and tested based on
 ## Changelog
 
 - **22.02.2025 - v0**
-  - Initial version.
+   - Initial version.
 - **22.02.2025 - v1**
-  - Updated README, `sc.py`, and `sc_test.py`.
+   - Updated README, `sc.py`, and `sc_test.py`.
 - **24.02.2025 - v2**
-  - Revised README and modified `sc.py`, `sc_test.py`.
+   - Revised README and modified `sc.py`, `sc_test.py`.
 - **26.02.2025 - v3**
-  - Finalized README and code optimizations.
+   - Finalized README and code optimizations.
 - **02.03.2025 - v4**
-  - Revised README and modified `sc.py`, `sc_test.py`.
+   - Revised README and modified `sc.py`, `sc_test.py`.
 
 ## Design Notes
 
 - **Separate Chaining Hash Map**:
-  - Each bucket (array index) stores a linked list of key-value pairs.
-  - Hash value modulo capacity determines the bucket index.
-  - Duplicate values are rejected within the same bucket.
+   - Each bucket (array index) stores a linked list of key-value pairs.
+   - Hash value modulo capacity determines the bucket index.
+   - Duplicate values are rejected within the same bucket.
 
 - **Reverse Operation**:
-  - Initially, only bucket elements were reversed, causing test failures.
-  - Correct approach: Reverse both bucket order and element order within each bucket.
+   - Initially, only bucket elements were reversed, causing test failures.
+   - Correct approach: Reverse both bucket order and element order within each bucket.
 
 - **None Handling**:
-  - Tested adding `None` values in `sc_test.py` with no errors.
-  - Implementation correctly handles `None` in all operations.
+   - Tested adding `None` values in `sc_test.py` with no errors.
+   - Implementation correctly handles `None` in all operations.
 
 - **Monoid laws Test**:
-  - Adding `Associativity` and `Identity element` test in `sc_test.py`.
+   - Adding `Associativity` and `Identity element` test in `sc_test.py`.
