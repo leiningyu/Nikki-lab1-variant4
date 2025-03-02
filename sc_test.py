@@ -2,6 +2,7 @@ import pytest
 from hypothesis import given, strategies as st
 from sc import HashSet
 
+
 def test_add():
     s = HashSet()
     s.add(1)
@@ -74,7 +75,8 @@ def test_from_list_to_list():
         s = HashSet()
         s.from_list(data)
         # Notice the disorder of the set
-        assert sorted(s.to_list(), key=hash) == sorted(list(set(data)), key=hash)
+        assert sorted(s.to_list(), key=hash) == sorted(list(set(data)), 
+                                                       key=hash)
 
 
 def test_filter():
@@ -104,8 +106,8 @@ def test_map():
 def test_reduce():
     s = HashSet()
     assert s.reduce(lambda a, b: a+b, 0) == 0  # Empty set
-    
-    s.from_list([1,2,3])
+
+    s.from_list([1, 2, 3])
     assert s.reduce(lambda a, b: a+b) == 6  # No initial value
     assert s.reduce(lambda a, b: a+b, 10) == 16
 
@@ -124,7 +126,7 @@ def test_iterator():
     for x in s:
         collected.append(x)
     assert sorted(collected) == sorted(data)
-    
+
     empty_iter = iter(HashSet())
     with pytest.raises(StopIteration):
         next(empty_iter)
@@ -147,7 +149,7 @@ def test_concat():
     s2 = HashSet().from_list([None, 3])
     combined = s1.concat(s2)
     assert sorted(combined.to_list(), key=lambda x: str(x)) == [1, 3, None]
-    
+
     # Empty set test
     empty = HashSet.empty()
     combined = empty.concat(s1)
@@ -161,11 +163,13 @@ def test_from_to_list_equivalence(data):
     assert set(s.to_list()) == set(data)
     assert len(s.to_list()) == len(set(data))
 
+
 @given(st.lists(st.integers()))
 def test_size_equivalence(data):
     s = HashSet()
     s.from_list(data)
     assert s.size() == len(set(data))
+
 
 @given(st.integers(), st.integers())
 def test_monoid_laws(a, b):
@@ -173,7 +177,8 @@ def test_monoid_laws(a, b):
     s1 = HashSet().from_list([a])
     s2 = HashSet().from_list([b])
     s3 = HashSet().from_list([a, b])
-    assert s1.concat(s2).concat(s3).to_list() == s1.concat(s2.concat(s3)).to_list()
+    assert s1.concat(s2).concat(s3).to_list() == s1.concat(s2.concat(
+        s3)).to_list()
 
     # Identity element
     empty = HashSet.empty()
