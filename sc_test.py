@@ -75,7 +75,7 @@ def test_from_list_to_list():
         s = HashSet()
         s.from_list(data)
         # Notice the disorder of the set
-        assert sorted(s.to_list(), key=hash) == sorted(list(set(data)), 
+        assert sorted(s.to_list(), key=hash) == sorted(list(set(data)),
                                                        key=hash)
 
 
@@ -185,4 +185,4 @@ def test_monoid_laws(a, b):
     s = HashSet().from_list([a])
     assert s.concat(empty).to_list() == s.to_list()
     assert empty.concat(s).to_list() == s.to_list()
-    
+
