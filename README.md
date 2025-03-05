@@ -58,11 +58,14 @@ A series of functional requirements are realized and tested based on
 ## Analysis and Conclusion
 
 - **Our implementation restrictions**:
-   - The range of our function is still not very large, and the test cases don't cover the whole situations.
+   - The range of our function is still not very large, and the test cases don't cover
+     the whole situations.
 
 - **The advantages and disadvantages of unit test and PBT tests**:
-   - The advantage of Unit test is that we can quickly find and fix problems.The downside is that we need
-     to write a lot of use cases to ensure test coverage and prepare an operational environment for them.
-   - The advantage of PBT test is that it can automatically generate a large number of test cases, which provides
-     a broader guarantee of correctness than testing specific scenarios individually. The disadvantage is that
-     randomgeneration may not trigger true defects, resulting in false "pass" results.
+   - The advantage of Unit test is that we can quickly find and fix problems.The downside
+     is that we need to write a lot of use cases to ensure test coverage and prepare an
+     operational environment for them.
+   - The advantage of PBT test is that it can automatically generate a large number of
+     test cases, which provides a broader guarantee of correctness than testing specific
+     scenarios individually. The disadvantage is that randomgeneration may not trigger
+     true defects, resulting in false "pass" results.
