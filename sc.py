@@ -1,3 +1,6 @@
+from functools import reduce
+
+
 class HashSet:
     DEFAULT_CAPACITY = 16
 
@@ -58,20 +61,24 @@ class HashSet:
 
     # 9. Filter data structure by a specific predicate
     def filter(self, predicate):
-        new_set = HashSet(self.capacity)
         for bucket in self.buckets:
-            for item in bucket:
-                if predicate(item):
-                    new_set.add(item)
-        return new_set
+            original_length = len(bucket)
+            # Filters the elements in the current bucket
+            bucket[:] = [item for item in bucket if predicate(item)]
+            self._size -= original_length - len(bucket)
+        return self
 
     # 10. Map
     def map(self, f):
-        new_set = HashSet(self.capacity)
+        mapped_items = []
         for bucket in self.buckets:
             for item in bucket:
-                new_set.add(f(item))
-        return new_set
+                mapped_items.append(f(item))
+        self.buckets = [[] for _ in range(self.capacity)]
+        self._size = 0
+        for item in mapped_items:
+            self.add(item)
+        return self
 
     # 11. Reduce process elements and build a value by the function
     def reduce(self, reducer, initial=None):
@@ -102,9 +109,7 @@ class HashSet:
 
     # 14. Concat
     def concat(self, other):
-        new_set = HashSet()
-        if self:  # empty set
-            new_set.from_list(self.to_list())
-        if other:
-            new_set.from_list(other.to_list())
-        return new_set
+        for bucket in other.buckets:
+            for item in bucket:
+                self.add(item)
+        return self
