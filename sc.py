@@ -1,6 +1,3 @@
-from functools import reduce
-
-
 class HashSet:
     DEFAULT_CAPACITY = 16
 
