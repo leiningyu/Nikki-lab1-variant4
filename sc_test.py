@@ -171,12 +171,12 @@ def test_size_equivalence(data):
     assert s.size() == len(set(data))
 
 
-@given(st.integers(), st.integers())
-def test_monoid_laws(a, b):
+@given(st.integers(), st.integers(), st.integers())
+def test_monoid_laws(a, b, c):
     # Associativity
     s1 = HashSet().from_list([a])
     s2 = HashSet().from_list([b])
-    s3 = HashSet().from_list([a, b])
+    s3 = HashSet().from_list([c])
     assert s1.concat(s2).concat(s3).to_list() == s1.concat(s2.concat(
         s3)).to_list()
 
