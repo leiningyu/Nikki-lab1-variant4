@@ -9,6 +9,14 @@ class HashSet:
     def _hash(self, value):
         return hash(value) % self.capacity if value is not None else 0
 
+    # 12. Data structure should be an iterator
+    def __iter__(self):
+        for bucket in self.buckets:
+            yield from bucket
+
+    def __next__(self):
+        return next(iter(self))
+
     # 1. Add a new element
     def add(self, value):
         idx = self._hash(value)
@@ -59,10 +67,8 @@ class HashSet:
     # 9. Filter data structure by a specific predicate
     def filter(self, predicate):
         for bucket in self.buckets:
-            original_length = len(bucket)
             # Filters the elements in the current bucket
             bucket[:] = [item for item in bucket if predicate(item)]
-            self._size -= original_length - len(bucket)
         return self
 
     # 10. Map
@@ -90,14 +96,6 @@ class HashSet:
         for element in it:
             value = reducer(value, element)
         return value
-
-    # 12. Data structure should be an iterator
-    def __iter__(self):
-        for bucket in self.buckets:
-            yield from bucket
-
-    def __next__(self):
-        return next(iter(self))
 
     # 13. Monoid
     @classmethod
