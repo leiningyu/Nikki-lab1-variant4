@@ -83,7 +83,19 @@ class HashSet:
             self.add(item)
         return self
 
-    # 11. Reduce process elements and build a value by the function
+    # 11. Monoid
+    @classmethod
+    def empty(cls):
+        return cls(1)  # Minimum capacity
+
+    # 13. Concat
+    def concat(self, other):
+        for bucket in other.buckets:
+            for item in bucket:
+                self.add(item)
+        return self
+
+    # 14. Reduce process elements and build a value by the function
     def reduce(self, reducer, initial=None):
         it = iter(self)
         if initial is None:
@@ -96,15 +108,3 @@ class HashSet:
         for element in it:
             value = reducer(value, element)
         return value
-
-    # 13. Monoid
-    @classmethod
-    def empty(cls):
-        return cls(1)  # Minimum capacity
-
-    # 14. Concat
-    def concat(self, other):
-        for bucket in other.buckets:
-            for item in bucket:
-                self.add(item)
-        return self
