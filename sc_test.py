@@ -179,7 +179,7 @@ def test_monoid_laws(a, b, c):
     s3 = HashSet().from_list([c])
     s1.concat(s2)
     s1.concat(s3)
- 
+
     t1 = HashSet().from_list([a])
     t2 = HashSet().from_list([b])
     t3 = HashSet().from_list([c])
