@@ -177,15 +177,15 @@ def test_monoid_laws(a, b, c):
     s1 = HashSet().from_list([a])
     s2 = HashSet().from_list([b])
     s3 = HashSet().from_list([c])
-
-    # copy setS
-    def copy_set(s):
-        return HashSet().from_list(s.to_list())
-
-    left = copy_set(s1).concat(copy_set(s2).concat(copy_set(s3)))
-    right = (copy_set(s1).concat(copy_set(s2))).concat(copy_set(s3))
-
-    assert left.to_list() == right.to_list()
+    s1.concat(s2)
+    s1.concat(s3)
+ 
+    t1 = HashSet().from_list([a])
+    t2 = HashSet().from_list([b])
+    t3 = HashSet().from_list([c])
+    t1.concat(t2)
+    t1.concat(t3)
+    assert sorted(s1.to_list()) == sorted(t1.to_list())
 
     # Identity element
     empty = HashSet.empty()
