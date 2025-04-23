@@ -180,9 +180,9 @@ def test_monoid_laws(a, b, c):
     s1.concat(s2)
     s1.concat(s3)
 
-    t1 = HashSet().from_list([a])
-    t2 = HashSet().from_list([b])
-    t3 = HashSet().from_list([c])
+    t1 = HashSet().from_list(a)
+    t2 = HashSet().from_list(b)
+    t3 = HashSet().from_list(c)
     t2.concat(t3)
     t1.concat(t2)
     assert sorted(s1.to_list()) == sorted(t1.to_list())
